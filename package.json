@@ -1,0 +1,29 @@
+{
+  "name": "namaste-react",
+  "version": "1.0.0",
+  "description": "This is Namaste React by Prasad CM",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/prasad-chandera/namaste-react.git"
+  },
+  "keywords": [],
+  "author": "Prasad CM",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/prasad-chandera/namaste-react/issues"
+  },
+  "homepage": "https://github.com/prasad-chandera/namaste-react#readme",
+  "devDependencies": {
+    "parcel": "^2.16.4"
+  },
+  "dependencies": {
+    "react": "^19.2.7",
+    "react-dom": "^19.2.7"
+  },
+  "browsersList":[
+    "last 2 versions"
+  ]
+}
