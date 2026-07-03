@@ -7,7 +7,6 @@ const Header = () => {
                 className='logo' 
                 src={LOGO_URL} 
             />
-            
             <div className='nav-items' >
                 <ul>
                     <li>Home</li>
