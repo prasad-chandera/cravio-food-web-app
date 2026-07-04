@@ -1,23 +1,14 @@
 import React from "react"
 import { CDN_URL } from "../utils/constants";
+import { Restaurant } from "../models/models";
 interface RestaurantCardProps  {
-    resData: {
-        data:{
-            id: string,
-            name: string,
-            cloudinaryImageId?: string,
-            cuisines: string[],
-            costForTwo: number,
-            deliveryTime: number,
-            avgRating: number
-        }
-    }
+    resData:Restaurant
 }
 
 const RestaurantCard = (props:RestaurantCardProps) =>{
+    console.log(props)
     const {resData} = props
-
-    const {name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId} = resData?.data
+    const {name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId} = resData
     return (
         <div className='res-card' >
             <img 
@@ -28,8 +19,8 @@ const RestaurantCard = (props:RestaurantCardProps) =>{
             <h3>{name}</h3>
             <h4>{cuisines?.join(', ')}</h4>
             <h4>{avgRating} stars</h4>
-            <h4>₹{costForTwo/100} FOR TWO</h4>
-            <h4>{deliveryTime} minutes</h4>
+            <h4>{costForTwo}</h4>
+            {/* <h4>{deliveryTime} minutes</h4> */}
         </div>
     )
 }
