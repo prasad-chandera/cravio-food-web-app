@@ -1,4 +1,3 @@
-import React from "react"
 import { CDN_URL } from "../utils/constants";
 import { Restaurant } from "../models/models";
 interface RestaurantCardProps  {
@@ -6,7 +5,6 @@ interface RestaurantCardProps  {
 }
 
 const RestaurantCard = (props:RestaurantCardProps) =>{
-    console.log(props)
     const {resData} = props
     const {name, cuisines, avgRating, costForTwo, deliveryTime, cloudinaryImageId} = resData
     return (

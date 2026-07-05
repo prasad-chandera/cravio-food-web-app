@@ -1,10 +1,13 @@
 import React, { useState , useEffect} from "react";
 import RestaurantCard from './RestaurantCard'
 import { Restaurant } from "../models/models";
+import Shimmer from "../Components/Shimmer";
 
 
 const Body = () =>{
     const [listOfRestaurants, setListOfRestaurants] = useState<Restaurant[]>([]) 
+    const [searchText, setSearchText] = useState('') 
+    const [filteredRestaurants, setFilteredRestaurants] = useState<Restaurant[]>([]) 
 
     useEffect(()=>{
         fetchData()
@@ -16,33 +19,46 @@ const Body = () =>{
         const restaurants = json?.data?.cards[1]?.card?.card?.gridElements?.infoWithStyle?.restaurants ?? [];
         const resultData: Restaurant[] = restaurants.map((resInfo: { info: Restaurant }) => resInfo.info);
         setListOfRestaurants(resultData)
+        setFilteredRestaurants(resultData)
     }
 
-    if(!listOfRestaurants?.length){
-        return <h1>Loading...</h1>
-    }
-    return (
-        <div className='body' >
-            <div className='filter' >
-                <button 
-                    className='filter-btn' 
-                    onClick={()=>{
-                        const filteredList  = listOfRestaurants?.filter((res: Restaurant) => Number(res.avgRating) > 4) 
-                        setListOfRestaurants(filteredList)
-                    }}
-                >
-                    Top Rated Restaurants
-                </button>
+    
+    return !listOfRestaurants?.length
+        ? <Shimmer/>
+        : (
+            <div className='body' >
+                <div className='filter' >
+                    <div className="search" >
+                        <input type="text" className="search-box" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
+                        <button 
+                            className="search-btn" 
+                            onClick={()=>{
+                                const filteredList = listOfRestaurants?.filter(res => res.name?.toLowerCase()?.includes(searchText?.trim()?.toLowerCase()))
+                                setFilteredRestaurants(filteredList)
+                            }}
+                        >
+                            Search
+                        </button>
+                    </div>
+                    <button 
+                        className='filter-btn' 
+                        onClick={()=>{
+                            const filteredList  = listOfRestaurants?.filter((res: Restaurant) => Number(res.avgRating) > 4) 
+                            setFilteredRestaurants(filteredList)
+                        }}
+                    >
+                        Top Rated Restaurants
+                    </button>
+                </div>
+                <div className='res-container' >
+                    {
+                        filteredRestaurants?.map(restaurant => (
+                            <RestaurantCard key={restaurant?.id} resData={restaurant}/>
+                        ))
+                    }
+                    
+                </div>
             </div>
-            <div className='res-container' >
-                {
-                    listOfRestaurants?.map(restaurant => (
-                        <RestaurantCard key={restaurant?.id} resData={restaurant}/>
-                    ))
-                }
-                
-            </div>
-        </div>
-    )
+        )
 }
 export default Body
