@@ -24,6 +24,10 @@ const Header = () => {
                         <Link to='/contact' >Contact Us</Link>
                         
                     </li>
+                    <li>
+                        <Link to='/grocery' >Grocery</Link>
+                        
+                    </li>
                     <li>Cart</li>
                     {onlineStatus ? '1111': '00000'}
                     <button className="login" onClick={()=>{setLogBtn(logBtn === 'Log in' ?'Log out' : 'Log in')}} >{logBtn}</button>
