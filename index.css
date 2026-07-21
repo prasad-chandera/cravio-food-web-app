@@ -89,3 +89,8 @@
     padding: 0px 20px;
     cursor: pointer;
 }
+.user-card{
+    padding: 10px;
+    border: 1px solid grey;
+    margin-bottom: 10px;
+}
