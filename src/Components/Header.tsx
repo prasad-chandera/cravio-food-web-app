@@ -2,17 +2,19 @@ import React, { useState } from "react"
 import { LOGO_URL } from "../utils/constants";
 import { Link } from "react-router";
 import { useOnlineStatus } from "../utils/useOnlineStatus";
+import LOGO from "../assets/images/logo.png";
 const Header = () => {
     const [logBtn,setLogBtn] = useState('Log in')
     const {onlineStatus} = useOnlineStatus()
     return (
-        <div className='header' >
+        <div className='flex justify-between bg-pink-400' >
             <img 
-                className='logo' 
-                src={LOGO_URL} 
+                className='w-20 h-20 object-contain'
+                src={LOGO}
+                alt='Food app logo'
             />
             <div className='nav-items' >
-                <ul>
+                <ul className="flex justify-between" >
                     <li>
                         <Link to='/' >Home</Link>
                     </li>
