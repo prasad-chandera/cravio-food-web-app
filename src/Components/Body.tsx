@@ -31,12 +31,16 @@ const Body = () =>{
     return !listOfRestaurants?.length
         ? <Shimmer/>
         : (
-            <div className='body' >
-                <div className='filter' >
-                    <div className="search" >
-                        <input type="text" className="search-box" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
+            <div className='body ' >
+                <div className='filter flex items-center m-4 mb-0 p-4' >
+                    <div className="search " >
+                        <input 
+                            type="text" 
+                            className="search-box border h-[35]" 
+                            value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}
+                        />
                         <button 
-                            className="search-btn" 
+                            className="search-btn px-5 py-2 mr-15 rounded-lg cursor-pointer bg-green-100 ml-4" 
                             onClick={()=>{
                                 const filteredList = listOfRestaurants?.filter(res => res.name?.toLowerCase()?.includes(searchText?.trim()?.toLowerCase()))
                                 setFilteredRestaurants(filteredList)
@@ -45,19 +49,22 @@ const Body = () =>{
                             Search
                         </button>
                     </div>
-                    <button 
-                        className='filter-btn' 
-                        onClick={()=>{
-                            const filteredList  = listOfRestaurants?.filter((res: Restaurant) => Number(res.avgRating) > 4) 
-                            setFilteredRestaurants(filteredList)
-                        }}
-                    >
-                        Top Rated Restaurants
-                    </button>
+                    <div>
+                        <button 
+                            className='filter-btn px-5 py-2 bg-gray-100 rounded-lg cursor-pointer' 
+                            onClick={()=>{
+                                const filteredList  = listOfRestaurants?.filter((res: Restaurant) => Number(res.avgRating) > 4) 
+                                setFilteredRestaurants(filteredList)
+                            }}
+                        >
+                            Top Rated Restaurants
+                        </button>
+
+                    </div>
                 </div>
-                <div className='res-container' >
+                <div className='res-container flex flex-wrap' >
                     {
-                        filteredRestaurants?.map(restaurant => (
+                        filteredRestaurants?.filter(item => item?.id !== "456789")?.map(restaurant => (
                             <Link key={restaurant?.id} to={`/restaurant/${restaurant?.id}`} ><RestaurantCard  resData={restaurant}/></Link>
                         ))
                     }
